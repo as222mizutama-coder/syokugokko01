@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>簡単に栄養価を知る "食ごっこ"</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__inner">
+      <h1>簡単に栄養価を知る <span class="quote">"食ごっこ"</span></h1>
+      <p class="hero__desc">
+        お盆にメニュー（単品）を載せて、1食分の栄養価と総カロリーをチェックできます。<br />
+        下のメニューを <b>ドラッグ＆ドロップ</b> するか、<b>クリック</b>して配置してください。
+      </p>
+      <div class="hero__note">※これはサンプルです（メニュー/栄養データは自由に差し替えできます）</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- 左：合計表示 -->
+    <section class="panel panel--stats">
+      <div class="panel__head">
+        <h2>1食の栄養（合計）</h2>
+        <button class="btn btn--ghost" id="resetAll">全部リセット</button>
+      </div>
+
+      <div class="totalRow">
+        <div class="kcal">
+          <div class="kcal__label">総カロリー</div>
+          <div class="kcal__value"><span id="totalKcal">0</span> <small>kcal</small></div>
+          <div class="kcal__sub">目標：<span id="goalKcal">650</span> kcal / 食</div>
+        </div>
+      </div>
+
+      <div class="bars" id="bars"></div>
+
+      <details class="detail">
+        <summary>合計の内訳（数値）</summary>
+        <div class="grid2">
+          <div class="kv"><span>たんぱく質</span><b><span id="totalP">0</span> g</b></div>
+          <div class="kv"><span>脂質</span><b><span id="totalF">0</span> g</b></div>
+          <div class="kv"><span>炭水化物</span><b><span id="totalC">0</span> g</b></div>
+          <div class="kv"><span>食物繊維</span><b><span id="totalFib">0</span> g</b></div>
+          <div class="kv"><span>食塩相当量</span><b><span id="totalSalt">0</span> g</b></div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 右：お盆 + メニュー -->
+    <section class="panel panel--builder">
+      <div class="panel__head">
+        <h2>お盆（1食メニュー）</h2>
+        <div class="hint">コツ：先に「配置先」を選ぶとクリック配置がラクです</div>
+      </div>
+
+      <div class="trays">
+        <div class="trayWrap">
+          <div class="trayTop">
+            <span class="badge badge--rice">主食</span>
+            <div class="trayActions">
+              <button class="btn btn--mini btn--ghost" data-reset="staple">リセット</button>
+              <button class="btn btn--mini btn--primary" data-select="staple">ここに置く</button>
+            </div>
+          </div>
+
+          <div class="tray" data-tray="staple">
+            <div class="tray__empty">ここに置く</div>
+          </div>
+        </div>
+
+        <div class="trayWrap">
+          <div class="trayTop">
+            <span class="badge badge--main">主菜</span>
+            <div class="trayActions">
+              <button class="btn btn--mini btn--ghost" data-reset="main">リセット</button>
+              <button class="btn btn--mini btn--primary" data-select="main">ここに置く</button>
+            </div>
+          </div>
+
+          <div class="tray" data-tray="main">
+            <div class="tray__empty">ここに置く</div>
+          </div>
+        </div>
+
+        <div class="trayWrap">
+          <div class="trayTop">
+            <span class="badge badge--side">副菜</span>
+            <div class="trayActions">
+              <button class="btn btn--mini btn--ghost" data-reset="side">リセット</button>
+              <button class="btn btn--mini btn--primary" data-select="side">ここに置く</button>
+            </div>
+          </div>
+
+          <div class="tray" data-tray="side">
+            <div class="tray__empty">ここに置く</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menuHead">
+        <div class="tabs" id="tabs"></div>
+
+        <div class="menuTools">
+          <button class="btn btn--ghost btn--mini" id="toggleView">リスト表示</button>
+          <input class="search" id="search" placeholder="メニュー検索（例：味噌 / 鶏 / サラダ）" />
+        </div>
+      </div>
+
+      <div class="menuGrid" id="menu"></div>
+      <div class="menuList hidden" id="menuList"></div>
+
+      <p class="footerNote">
+        ※ サンプルデータです。あなたのメニューに合わせて「data（栄養値）」を差し替えるだけで拡張できます。
+      </p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
